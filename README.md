@@ -9,7 +9,7 @@
 
 DevExpress Blazor AI Chat component (`DxAIChat`) allows you to integrate AI-driven interactions into your applications. This component offers a variety of powerful features, including: 
 
-* [Customize message and empty message area appearance](#customize-message-and-empty-message-area-appearance)
+* [Customizable message and empty message area appearance](#customize-message-and-empty-message-area-appearance)
 * [Manual message processing](#manual-message-processing)
 * [Streaming response](#streaming-response)
 * [AI assistants compatibility](#ai-assistants-compatibility)
@@ -17,7 +17,7 @@ DevExpress Blazor AI Chat component (`DxAIChat`) allows you to integrate AI-driv
 
 ## Implementation Details
 
-This example adds the `DxAIChat` in an application, customizes its settings and integrate it into WinForms, WPF, and .NET MAUI applications.
+This example adds the `DxAIChat` in a Blazor application, customizes its settings and integrates it into WinForms, WPF, and .NET MAUI applications.
 
 ### Register AI Service
 
@@ -95,7 +95,8 @@ File to review: [Chat-CustomMessage.razor](./CS/DevExpress.AI.Samples.Blazor/Com
 
 ### Manual message processing
 
-The `MessageSent` event fires after a user sent a message. In the event handler, you can use the `Content` argument to access the sent message and the `SendMessage` method to send another message to the chat.
+When a user sends a message to the chat, the `MessageSent` event fires. Handle the event to manually process this action.
+You can use the `Content` event argument to access the sent text or call the `SendMessage` method to send another message to the chat.
 
 ```razor
 <DxAIChat CssClass="my-chat" MessageSent="MessageSent" />
@@ -123,7 +124,7 @@ File to review: [Chat-Streaming.razor](./CS/DevExpress.AI.Samples.Blazor/Compone
 
 ### AI assistants compatibility
 
-The `DxAIChat` component supports [OpenAI Assistants](https://techcommunity.microsoft.com/t5/ai-azure-ai-services-blog/announcing-azure-openai-service-assistants-public-preview/ba-p/4143217) that allow you to provide a model with supplementary documents that contain external knowledge. OpenAI automatically parses these documents and searches through them to retrieve relevant content to answer user queries.
+The `DxAIChat` component supports [OpenAI Assistants](https://techcommunity.microsoft.com/t5/ai-azure-ai-services-blog/announcing-azure-openai-service-assistants-public-preview/ba-p/4143217) that allow you to provide a model with supplementary documents containing external knowledge. OpenAI parses these documents and searches through them to retrieve relevant content to answer user queries.
 
 Add the following code to the _Program.cs_ file to register AI Assistant service in the application:
 
@@ -183,25 +184,13 @@ Folders to review: [DevExpress.AI.Samples.MAUIBlazor](./CS/DevExpress.AI.Samples
 * [DevExpress.AI.Samples.WinBlazor](./CS/DevExpress.AI.Samples.WinBlazor/)
 * [DevExpress.AI.Samples.WPFBlazor](./CS/DevExpress.AI.Samples.WPFBlazor/)
 
-<!-- add later
-## Blogs
-
-* [New DevExpress AI-Focused Blazor Chat Control - Early Access Preview (v24.2)](todo)
-* [DevExpress AI-Powered Extensions — Early Access Preview v24.2 — Extending Text Editors with AI Capabilities](todo)
--->
-
 ## Documentation
-
-<!-- add later
-* [DxAIChat](https://docs.devexpress.com/Blazor/DevExpress.AIIntegration.Blazor.Chat.DxAIChat)
-* [AI Integration](todo)
--->
 
 * [Create a Blazor Hybrid Project](https://docs.devexpress.com/Blazor/404118/get-started/create-project-hybrid)
 
 ## More Examples
 
-* [link to the second example](todo)
+* [Rich Text Editor and HTML Editor for Blazor - How to integrate AI-powered extensions](https://github.com/DevExpress-Examples/blazor-ai-integration-to-text-editors)
 
 
 <!-- feedback -->

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="DevExpress.AI.Samples.MAUIBlazor.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dx="http://schemas.devexpress.com/maui"
+    xmlns:local="clr-namespace:DevExpress.AI.Samples.MAUIBlazor"
+    x:DataType="local:MainViewModel"
+    BackgroundColor="{dx:ThemeColor Key=Surface}">
+
+    <ContentPage.BindingContext>
+        <local:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <dx:SafeKeyboardAreaView>
+        <Grid RowDefinitions="*,Auto">
+            <BlazorWebView x:Name="blazorWebView" HostPage="wwwroot/index.html">
+                <BlazorWebView.RootComponents>
+                    <RootComponent ComponentType="{x:Type local:MauiChatUIWrapper}" Selector="#app" />
+                </BlazorWebView.RootComponents>
+            </BlazorWebView>
+
+            <Grid
+                Grid.Row="1"
+                Padding="16"
+                ColumnDefinitions="*,40"
+                ColumnSpacing="16">
+                <dx:DXBorder BackgroundColor="{dx:ThemeColor Key=SurfaceContainer}" CornerRadius="28">
+                    <dx:MultilineEdit
+                        BorderThickness="0"
+                        BoxMinHeight="40"
+                        BoxPadding="16,8"
+                        ClearIconVisibility="Never"
+                        FocusedBorderThickness="0"
+                        MaxLineCount="4"
+                        PlaceholderText="Your text message"
+                        Text="{Binding Message}"
+                        TextVerticalAlignment="Center" />
+                </dx:DXBorder>
+                <dx:DXButton
+                    Grid.Column="1"
+                    Padding="8"
+                    ButtonType="Accent"
+                    Command="{Binding SendMessageCommand}"
+                    Icon="send"
+                    IconHeight="24"
+                    IconWidth="24"
+                    VerticalOptions="End" />
+            </Grid>
+        </Grid>
+    </dx:SafeKeyboardAreaView>
+
+</ContentPage>

@@ -159,6 +159,12 @@ builder.Services.AddDevExpressAI((config) => {
 });
 ```
 
+Include a supplementary document in the project file as an `EmbeddedResource`:
+
+```
+<EmbeddedResource Include="Data\Restaurant Menu.pdf" />
+```
+
 Handle the `Initialized` event and call the `UseAssistantAsync` method to supply a file to the Open AI Assistant. 
 
 ```razor

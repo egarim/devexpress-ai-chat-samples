@@ -9,6 +9,7 @@
 DevExpress Blazor AI Chat component (`DxAIChat`) allows you to integrate AI-driven interactions into your applications. This component offers a variety of powerful features, including: 
 
 * [Customizable message and empty message area appearance](#customize-message-and-empty-message-area-appearance)
+* [Text and markdown response](#text-and-markdown-response)
 * [Manual message processing](#manual-message-processing)
 * [Streaming response](#streaming-response)
 * [AI assistants compatibility](#ai-assistants-compatibility)
@@ -91,6 +92,30 @@ File to review: [Chat.razor](./CS/DevExpress.AI.Samples.Blazor/Components/Pages/
 ```
 
 File to review: [Chat-CustomMessage.razor](./CS/DevExpress.AI.Samples.Blazor/Components/Pages/Chat-CustomMessage.razor), [Chat-CustomEmptyState.razor](./CS/DevExpress.AI.Samples.Blazor/Components/Pages/Chat-CustomEmptyState.razor)
+
+### Text and markdown response
+
+The AI service responds to `DxAIChat` with plain text. The component parses this text as HTML code producing messages without formatting.
+
+To display rich formatted messages, set the `RenderMode` property to `Markdown` and use a markdown processor to convert the response content to HTML code.
+
+```razor
+@using Markdig;
+
+<DxAIChat CssClass="my-chat" RenderMode="AnswerRenderMode.Markdown">
+    <MessageContentTemplate>
+        <div class="my-chat-content">
+            @ToHtml(context.Content)
+        </div>
+    </MessageContentTemplate>
+</DxAIChat>
+
+@code {
+    MarkupString ToHtml(string text) {
+        return (MarkupString)Markdown.ToHtml(text);
+    }
+}
+```
 
 ### Manual message processing
 

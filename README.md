@@ -8,12 +8,12 @@
 
 DevExpress Blazor AI Chat component (`DxAIChat`) allows you to integrate AI-driven interactions into your applications. This component offers a variety of powerful features, including: 
 
-* [Customizable appearance of messages and empty message area](#customize-message-and-empty-message-area-appearance)
-* [Text or markdown response](#text-and-markdown-response)
+* [Customizable appearance of messages and empty message area](#customize-appearance-of-messages-and-empty-message-area)
+* [Text or markdown response](#text-or-markdown-response)
 * [Manual message processing](#manual-message-processing)
 * [Streaming response](#streaming-response)
-* [Compatibility with OpenAI Assistants](#ai-assistants-compatibility)
-* [Integration into WinForms, WPF and .NET MAUI apps](#integration)
+* [Compatibility with OpenAI Assistants](#compatibility-with-openai-assistants)
+* [Integrate AI Chat into WinForms, WPF and .NET MAUI Apps](#integration)
 
 ## Implementation Details
 

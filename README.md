@@ -4,20 +4,20 @@
 [![](https://img.shields.io/badge/💬_Leave_Feedback-feecdd?style=flat-square)](#does-this-example-address-your-development-requirementsobjectives)
 <!-- default badges end -->
 
-# AI Chat for Blazor - How to add DxAIChat component in Blazor, MAUI, WPF, and WinForms applications
+# AI Chat for Blazor - How to add DxAIChat component to Blazor, MAUI, WPF, and WinForms applications
 
 DevExpress Blazor AI Chat component (`DxAIChat`) allows you to integrate AI-driven interactions into your applications. This component offers a variety of powerful features, including: 
 
-* [Customizable message and empty message area appearance](#customize-message-and-empty-message-area-appearance)
-* [Text and markdown response](#text-and-markdown-response)
+* [Customizable appearance of messages and empty message area](#customize-message-and-empty-message-area-appearance)
+* [Text or markdown response](#text-and-markdown-response)
 * [Manual message processing](#manual-message-processing)
 * [Streaming response](#streaming-response)
-* [AI assistants compatibility](#ai-assistants-compatibility)
+* [Compatibility with OpenAI Assistants](#ai-assistants-compatibility)
 * [Integration into WinForms, WPF and .NET MAUI apps](#integration)
 
 ## Implementation Details
 
-This example adds the `DxAIChat` in a Blazor application, customizes its settings and integrates it into WinForms, WPF, and .NET MAUI applications.
+This example adds a `DxAIChat` to a Blazor application, customizes its settings, and integrates it into WinForms, WPF, and .NET MAUI applications.
 
 ### Register AI Service
 
@@ -39,7 +39,7 @@ builder.Services.AddDevExpressAI((config) => {
 
 File to review: [Program.cs](./CS/DevExpress.AI.Samples.Blazor/Program.cs)
 
-### Add DxAIChat component in a Blazor Application
+### Add DxAIChat component to a Blazor Application
 
 Add the `<DxAIChat>…</DxAIChat>` markup to a .razor file:
 
@@ -62,13 +62,13 @@ Add the `<DxAIChat>…</DxAIChat>` markup to a .razor file:
 
 File to review: [Chat.razor](./CS/DevExpress.AI.Samples.Blazor/Components/Pages/Chat.razor)
 
-### Customize message and empty message area appearance
+### Customize appearance of messages and empty message area
 
 `DxAIChat` component implements the following message customization properties:
 
 * `MessageTemplate` - specifies a template for message bubbles.
 * `MessageContentTemplate` - specifies a template for message bubble content.
-* `EmptyMessageAreaTemplate` - specifies a template for an empty message area.
+* `EmptyMessageAreaTemplate` - specifies a template for the empty message area.
 
 ```razor
 <DxAIChat CssClass="my-chat">
@@ -93,11 +93,11 @@ File to review: [Chat.razor](./CS/DevExpress.AI.Samples.Blazor/Components/Pages/
 
 File to review: [Chat-CustomMessage.razor](./CS/DevExpress.AI.Samples.Blazor/Components/Pages/Chat-CustomMessage.razor), [Chat-CustomEmptyState.razor](./CS/DevExpress.AI.Samples.Blazor/Components/Pages/Chat-CustomEmptyState.razor)
 
-### Text and markdown response
+### Text or markdown response
 
-The AI service responds to `DxAIChat` with plain text. The component parses this text as HTML code producing messages without formatting.
+The AI service uses plain text as the default response format. 
 
-To display rich formatted messages, set the `RenderMode` property to `Markdown` and use a markdown processor to convert the response content to HTML code.
+To display rich formatted messages, set the `RenderMode` property to `Markdown`. Use a markdown processor to convert response content to HTML code.
 
 ```razor
 @using Markdig;
@@ -120,7 +120,7 @@ To display rich formatted messages, set the `RenderMode` property to `Markdown` 
 ### Manual message processing
 
 When a user sends a message to the chat, the `MessageSent` event fires. Handle the event to manually process this action.
-You can use the `Content` event argument to access the sent text or call the `SendMessage` method to send another message to the chat.
+You can use the `Content` event argument to access user input and call the `SendMessage` method to send another message to the chat.
 
 ```razor
 <DxAIChat CssClass="my-chat" MessageSent="MessageSent" />
@@ -138,7 +138,7 @@ File to review: [Chat-MessageSent.razor](./CS/DevExpress.AI.Samples.Blazor/Compo
 
 ### Streaming response
 
-When a user sends a request to the AI client, the entire response is generated before it is sent back. Set the `UseStreaming` property to `true` to enable the chat to stream the response as it is being generated and start displaying the beginning of the response before it is fully complete.
+After a user sends a request, the AI client generates and sends the entire response back. This operation may take a while, depending on various factors. You can make the chat appear more responsive if you set the `UseStreaming` property to `true`. In this case, the AI client transmits parts of response as they become available and the chat component adds those parts to the display message. 
 
 ```razor
 <DxAIChat CssClass="my-chat" UseStreaming="true" />
@@ -146,9 +146,9 @@ When a user sends a request to the AI client, the entire response is generated b
 
 File to review: [Chat-Streaming.razor](./CS/DevExpress.AI.Samples.Blazor/Components/Pages/Chat-Streaming.razor)
 
-### AI assistants compatibility
+### Compatibility with OpenAI assistants
 
-The `DxAIChat` component supports [OpenAI Assistants](https://techcommunity.microsoft.com/t5/ai-azure-ai-services-blog/announcing-azure-openai-service-assistants-public-preview/ba-p/4143217) that allow you to provide a model with supplementary documents containing external knowledge. OpenAI parses these documents and searches through them to retrieve relevant content to answer user queries.
+The `DxAIChat` component supports [OpenAI Assistants](https://techcommunity.microsoft.com/t5/ai-azure-ai-services-blog/announcing-azure-openai-service-assistants-public-preview/ba-p/4143217). This means you can specify a model with supplementary documents (external knowledge). OpenAI parses these documents and searches through them to retrieve relevant content and answer user queries.
 
 Add the following code to the _Program.cs_ file to register AI Assistant service in the application:
 
@@ -186,15 +186,15 @@ Handle the `Initialized` event and call the `UseAssistantAsync` method to supply
 
 File to review: [Chat-Assistant.razor](./CS/DevExpress.AI.Samples.Blazor/Components/Pages/Chat-Assistant.razor)
 
-### <a name="integration"></a> Integration AI Chat into WinForms, WPF and .NET MAUI Apps
+### <a name="integration"></a> Integrate AI Chat into WinForms, WPF and .NET MAUI Apps
 
-The Blazor Hybrid technology and the `BlazorWebView` components allows you to integrate `DxAIChat` component in WinForms, WPF and .NET MAUI applications. 
+The Blazor Hybrid technology and the `BlazorWebView` components allows you to integrate `DxAIChat` component into WinForms, WPF, and .NET MAUI applications. 
 
-The key points of the implementation:
+Keys to implementation:
 
-* The `ISelfEncapsulationService` interface allows you to work directly with the `DxAIChat` component instance and its properties from within desktop or mobile app.
-* Built-in `DxAIChat` wrappers initialize the required Blazor Theme scripts.
-* Custom CSS classes are used to hide the built-in input field and send button (see the _index.htm_ files).
+* The `ISelfEncapsulationService` interface allows you to work directly with the `DxAIChat` component instance and its properties from your desktop or mobile app.
+* Built-in `DxAIChat` wrappers initialize required Blazor Theme scripts.
+* Custom CSS classes hide the built-in input field and the Send button (see _index.htm_).
 
 Folders to review: [DevExpress.AI.Samples.MAUIBlazor](./CS/DevExpress.AI.Samples.MAUIBlazor/), [DevExpress.AI.Samples.WinBlazor](./CS/DevExpress.AI.Samples.WinBlazor/), [DevExpress.AI.Samples.WPFBlazor](./CS/DevExpress.AI.Samples.WPFBlazor/)
 

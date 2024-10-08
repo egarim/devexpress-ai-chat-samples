@@ -1,0 +1,47 @@
+﻿@page "/sk"
+@using DevExpress.AIIntegration.Blazor.Chat
+@using AIIntegration.Services.Chat;
+@using Microsoft.SemanticKernel.ChatCompletion
+@using System.Diagnostics
+@using System.Text.Json
+@using System.Text
+
+
+
+@* <DxButton Text="Download Chat History as Json" Click="DownloadClick" /> *@
+<DxAIChat CssClass="my-chat" MessageSent="MessageSent" />
+
+
+
+@inject IChatCompletionService chatCompletionsService ;
+@inject IJSRuntime JSRuntime;
+@code {
+
+    ChatHistory ChatHistory = new ChatHistory();
+
+    async Task DownloadClick(MouseEventArgs args)
+    {
+        var json = JsonSerializer.Serialize(ChatHistory);
+        await JSRuntime.InvokeVoidAsync("downloadFile", "ChatHistory.json", json);
+    }
+
+    async Task MessageSent(MessageSentEventArgs args)
+    {
+        //Add to the history the message the user just sent (notice we are adding it using AddUserMessage)
+        ChatHistory.AddUserMessage(args.Content);
+        //Pass the chat history to the chat completions service
+        var Result = await chatCompletionsService.GetChatMessageContentAsync(ChatHistory);
+
+        //based the chat history we get an answer from the service
+        string MessageContent = Result.InnerContent.ToString();
+
+        Debug.WriteLine("Message from chat completion service:" + MessageContent);
+
+        //Add to the history the message from the chat  completions service (notice we are adding it using AddAssistantMessage)
+        ChatHistory.AddAssistantMessage(MessageContent);
+
+        //the we push the answer to the U.I
+        var message = new Message(MessageRole.Assistant, MessageContent);
+        args.SendMessage(message);
+    }
+}

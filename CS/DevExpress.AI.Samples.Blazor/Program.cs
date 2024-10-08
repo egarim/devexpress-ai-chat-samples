@@ -2,6 +2,9 @@
 using Azure;
 using DevExpress.AI.Samples.Blazor.Components;
 using DevExpress.AIIntegration;
+using Microsoft.SemanticKernel.ChatCompletion;
+using Microsoft.SemanticKernel;
+using OpenAI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,14 +15,38 @@ builder.Services.AddRazorComponents()
 string azureOpenAIEndpoint = Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT");
 string azureOpenAIKey = Environment.GetEnvironmentVariable("AZURE_OPENAI_API_KEY");
 
+
+string OpenAiKey = Environment.GetEnvironmentVariable("OpenAiTestKey");
+
+var client = new OpenAIClient(new System.ClientModel.ApiKeyCredential(OpenAiKey));
+
 builder.Services.AddDevExpressBlazor();
+
+//HACK use this for Azure open AI
+//builder.Services.AddDevExpressAI((config) => {
+//    var client = new AzureOpenAIClient(
+//        new Uri(azureOpenAIEndpoint),
+//        new AzureKeyCredential(azureOpenAIKey));
+//    config.RegisterChatClientOpenAIService(client, "gpt4o");
+//    config.RegisterOpenAIAssistants(client, "gpt4o");
+//});
+
+
+//HACK use this for Open AI
 builder.Services.AddDevExpressAI((config) => {
-    var client = new AzureOpenAIClient(
-        new Uri(azureOpenAIEndpoint),
-        new AzureKeyCredential(azureOpenAIKey));
-    config.RegisterChatClientOpenAIService(client, "gpt4o");
-    config.RegisterOpenAIAssistants(client, "gpt4o");
+
+    //Open Ai models ID are a bit different than azure, Azure=gtp4o OpenAI=gpt-4o    
+    config.RegisterChatClientOpenAIService(client, "gpt-4o");
+    config.RegisterOpenAIAssistants(client, "gpt-4o");
 });
+
+//Adding semantic kernel
+var KernelBuilder = Kernel.CreateBuilder();
+KernelBuilder.AddOpenAIChatCompletion("gpt-4o", client);
+var sk = KernelBuilder.Build();
+var Chat = sk.GetRequiredService<IChatCompletionService>();
+builder.Services.AddSingleton<IChatCompletionService>(Chat);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

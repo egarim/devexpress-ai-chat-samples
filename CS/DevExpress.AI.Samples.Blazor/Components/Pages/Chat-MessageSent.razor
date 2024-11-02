@@ -6,7 +6,7 @@
 
 @code {
     void MessageSent(MessageSentEventArgs args) {
-        var message = new Message(MessageRole.Assistant, $"Processed: {args.Content}");
+        var message = new AIIntegration.Services.Chat.Message(MessageRole.Assistant, $"Processed: {args.Content}");
         args.SendMessage(message);
     }
 }

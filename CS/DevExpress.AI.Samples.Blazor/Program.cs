@@ -5,6 +5,7 @@ using DevExpress.AIIntegration;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel;
 using OpenAI;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +47,10 @@ KernelBuilder.AddOpenAIChatCompletion("gpt-4o", client);
 var sk = KernelBuilder.Build();
 var Chat = sk.GetRequiredService<IChatCompletionService>();
 builder.Services.AddSingleton<IChatCompletionService>(Chat);
+
+
+// Add this line of code
+builder.Services.AddBootstrapBlazor();
 
 var app = builder.Build();
 

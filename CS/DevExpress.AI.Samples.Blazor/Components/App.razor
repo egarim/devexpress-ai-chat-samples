@@ -8,10 +8,22 @@
     <script src="js/site.js"></script>
     <link rel="stylesheet" href="_content/DevExpress.Blazor.Themes/blazing-berry.bs5.min.css" />
     <link rel="stylesheet" href="app.css" />
+
+    <!-- Need to reference BootstrapBlazor.FontAwesome package !-->
+    <link href="_content/BootstrapBlazor.FontAwesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="_content/BootstrapBlazor/css/bootstrap.blazor.bundle.min.css" rel="stylesheet">
+
+    ...
+    <link href="css/site.css" rel="stylesheet">
+    <link href="BlazorApp1.styles.css" rel="stylesheet">
+
     @DxResourceManager.RegisterScripts()
 </head>
 
 <body>
+    <!-- add code !-->
+    <script src="_content/BootstrapBlazor/js/bootstrap.blazor.bundle.min.js"></script>
+
     <Routes @rendermode="InteractiveServer" />
     <script src="_framework/blazor.web.js"></script>
 </body>

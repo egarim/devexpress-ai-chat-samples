@@ -1,0 +1,65 @@
+﻿@page "/ct"
+
+<style>
+    .centered-carousel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Full viewport height to center vertically */
+    }
+
+    .carousel-container {
+        width: 280px;
+        height: 350px;
+    }
+
+    .carousel-button {
+        width: 280px;
+    
+    }
+</style>
+
+<div class="centered-carousel">
+    <Carousel class="carousel-container" Width="280" IsFade="true">
+        <CarouselItem Caption="Black Cat">
+            <img src="./images/black.png" alt="demo-image" />
+           
+        </CarouselItem>
+        <CarouselItem Caption="White Cat">
+            <img src="./images/white.png" alt="demo-image" />
+           
+        </CarouselItem>
+        <CarouselItem Caption="Orange Cat">
+            <img src="./images/orange.png" alt="demo-image" />
+           
+        </CarouselItem>
+    </Carousel>
+</div>
+<div class="centered-carousel">
+    <Carousel class="carousel-container" Width="280" IsFade="true">
+        <CarouselItem>
+            <ChildContent>
+               <div>
+                    <img src="./images/black.png" alt="demo-image" />
+                    <Button Color="Color.Primary" class="carousel-button" >Select black cat</Button>
+               </div>
+            </ChildContent>
+        </CarouselItem>
+        <CarouselItem >
+            <ChildContent>
+                <div>
+                    <img src="./images/white.png" alt="demo-image" />
+                    <Button Color="Color.Primary" class="carousel-button">Select white cat</Button>
+                </div>
+            </ChildContent>
+        </CarouselItem>
+        <CarouselItem>
+            <ChildContent>
+               <div>
+                    <img src="./images/orange.png" alt="demo-image" />
+                    <Button Color="Color.Primary" class="carousel-button">Select orange cat</Button>
+               </div>
+            </ChildContent>
+        </CarouselItem>
+    </Carousel>
+</div>

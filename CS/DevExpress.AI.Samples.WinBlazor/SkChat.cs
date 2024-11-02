@@ -12,10 +12,10 @@ using Microsoft.SemanticKernel;
 
 namespace DevExpress.AI.Samples.WinBlazor
 {
-    public partial class Form1 : XtraForm
+    public partial class SkChat : XtraForm
     {
         DxChatIncapsulationService service = new ();
-        public Form1()
+        public SkChat()
         {
             InitializeComponent();
             InitializeBlazorAIChat();
@@ -67,7 +67,7 @@ namespace DevExpress.AI.Samples.WinBlazor
                 }
             });
 
-            //Adding semantic kernel
+        
          
         }
 

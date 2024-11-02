@@ -2,12 +2,12 @@
 
 namespace DevExpress.Blazor.Internal {
     public interface ISelfEncapsulationService {
-        void Initialize(WinChatUIWrapper dxChatUI);
+        void Initialize(WinChatUIWrapperSk dxChatUI);
     }
 
     class DxChatIncapsulationService : ISelfEncapsulationService {
-        public WinChatUIWrapper? dxChatUI;
-        public void Initialize(WinChatUIWrapper dxChatUI) {
+        public WinChatUIWrapperSk? dxChatUI;
+        public void Initialize(WinChatUIWrapperSk dxChatUI) {
             this.dxChatUI = dxChatUI;
         }
     }

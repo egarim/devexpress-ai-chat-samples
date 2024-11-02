@@ -22,4 +22,10 @@
   <ItemGroup>
     <ProjectReference Include="..\DevExpress.AI.Samples.Blazor\DevExpress.AI.Samples.Blazor.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="SkChat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

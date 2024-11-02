@@ -7,14 +7,13 @@
 @using System.Text
 
 
-
 @* <DxButton Text="Download Chat History as Json" Click="DownloadClick" /> *@
 <DxAIChat CssClass="my-chat" MessageSent="MessageSent" />
 
 
-
 @inject IChatCompletionService chatCompletionsService ;
 @inject IJSRuntime JSRuntime;
+
 @code {
 
     ChatHistory ChatHistory = new ChatHistory();
@@ -27,10 +26,14 @@
 
     async Task MessageSent(MessageSentEventArgs args)
     {
+#pragma warning disable SKEXP0010
+
         //Add to the history the message the user just sent (notice we are adding it using AddUserMessage)
         ChatHistory.AddUserMessage(args.Content);
         //Pass the chat history to the chat completions service
-        var Result = await chatCompletionsService.GetChatMessageContentAsync(ChatHistory);
+        // ChatSystemPrompt = "you will finish every word on your answer with the '!' character"
+        var Settings = new OpenAIPromptExecutionSettings { MaxTokens = 500, Temperature = 0.5, ResponseFormat = "text" };
+        var Result = await chatCompletionsService.GetChatMessageContentAsync(ChatHistory, Settings);
 
         //based the chat history we get an answer from the service
         string MessageContent = Result.InnerContent.ToString();
@@ -41,7 +44,7 @@
         ChatHistory.AddAssistantMessage(MessageContent);
 
         //the we push the answer to the U.I
-        var message = new Message(MessageRole.Assistant, MessageContent);
+        var message = new AIIntegration.Services.Chat.Message(MessageRole.Assistant, MessageContent);
         args.SendMessage(message);
     }
 }

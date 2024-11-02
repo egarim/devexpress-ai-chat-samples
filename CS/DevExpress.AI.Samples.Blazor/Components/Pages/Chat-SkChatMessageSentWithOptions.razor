@@ -27,7 +27,7 @@
 </style>
 
 
-<DxAIChat CssClass="my-chat" MessageSent="MessageSent">
+<DxAIChat CssClass="my-chat" MessageSent="MessageSent" @ref="dxAIChat">
     <MessageTemplate>
         <div>
 
@@ -67,7 +67,7 @@
                                             <ChildContent>
                                                 <div>
                                                     <img src="@option.Image" alt="demo-image" />
-                                                    <Button Color="Color.Primary" class="carousel-button">@option.Description</Button>
+                                                    <Button Color="Color.Primary" OnClick="() => OptionClicked(option, md)" class="carousel-button">@option.Description</Button>
                                                 </div>
                                             </ChildContent>
                                         </CarouselItem>
@@ -95,9 +95,10 @@
 @inject IChatCompletionService chatCompletionsService ;
 @inject IJSRuntime JSRuntime;
 
+
 @code {
 
-
+    string CurrentMessage { get; set; };
     DxAIChat dxAIChat { get; set; }
     ChatHistory ChatHistory = new ChatHistory();
     string Structure="";
@@ -145,8 +146,14 @@
         Structure = JsonSerializer.Serialize(ResponseWithOption); 
         OptionSets = JsonSerializer.Serialize(optionSets); 
 
-    }
+     
 
+    }
+    async Task OptionClicked(Option option, MessageData md)
+    {
+        this.dxAIChat.CurrentMessage = $"the option you selected is {option.Description}";
+        await dxAIChat.SendButton.Click.InvokeAsync();
+    }
 
     async Task MessageSent(MessageSentEventArgs args)
     {

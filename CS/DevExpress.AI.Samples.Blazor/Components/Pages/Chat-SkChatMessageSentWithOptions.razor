@@ -41,11 +41,13 @@
     }
 </style>
 
-<div class="my-container">
+@* <div class="my-container">
     <DxButton Text="Attach" CssClass="my-button" Click="SendMessageCustom"></DxButton>
     <DxButton Text="Send" CssClass="my-button" Click="SendMessageCustom"></DxButton>
-@*     <DxAIChat CssClass="my-chat" MessageSent="MessageSent" @ref="dxAIChat"> *@
-<DxAIChat MessageSent="MessageSent" @ref="dxAIChat">
+   
+</div> *@
+<DxAIChat CssClass="my-chat" MessageSent="MessageSent" @ref="dxAIChat">
+    @* <DxAIChat MessageSent="MessageSent" @ref="dxAIChat"> *@
     <MessageTemplate>
         <div>
 
@@ -54,7 +56,7 @@
                 if (@context.Typing)
                 {
                     <span>Loading...</span>
-                    
+
                 }
                 else
                 {
@@ -106,15 +108,13 @@
                         }
                     }
                 }
-                
 
-             
+
+
             }
         </div>
     </MessageTemplate>
 </DxAIChat>
-</div>
-
 @inject IChatCompletionService chatCompletionsService ;
 @inject IJSRuntime JSRuntime;
 
